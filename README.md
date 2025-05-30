@@ -4,7 +4,7 @@
 
   A lightweight, continuous file deduplication daemon for BTRFS filesystems that runs with minimal system impact.
 
-  Overview
+ ##  Overview
 
   btrdupd is a daemon that continuously and passively deduplicates duplicate data on BTRFS filesystems.
 
