@@ -22,13 +22,14 @@
 
 ## Key Features
 
-- **File Based Deduplication**: Meant to be used on filesystems with many infrequently changing files.  
-- **Low System Impact**: Runs as passively as possible, using nice, ionice, and low ram usage
-- **BTRFS Transaction Log Monitoring**:  Passively detects changes in the filesystem without the large overhead of inotifywait, or contiunuous filesystem scans
+- **File Based Deduplication**: Meant to be used on filesystems with many infrequently changing files
+- **Passive Operation**: Continuously runs in the background without any maintenance
+- **Low System Impact**: Single threaded process using nice, ionice, and low ram, for low system impact
+- **BTRFS Transaction Log Monitoring**:  Passively detects file changes without the overhead of inotifywait, or the resource impact of file system scans
+- **Automatic Backoff from continuously modified files**: Intellegently avoids hashing and deduplication of files which are being actively modified, such as open databases
 - **Fast Snapshot Deduplication**: Can deduplicate copies of a file in snapshots
-- **Maintenance Window**: Can be configured to limit file hashing and deduplication to a range of hours of the day
+- **Maintenance Window**: Can limit heavy io tasks like deduplication to a range of hours of the day
 - **Safe Operation**: Uses `duperemove` for verified, safe deduplication
-- **Operational Modes**: One-time processing or continuous daemon mode
 
 ## How It Works
 
