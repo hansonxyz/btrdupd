@@ -23,7 +23,6 @@
 ## Key Features
 
 - **File Based Deduplication**: Meant to be used on filesystems with many infrequently changing files.  
-- **Multi-Volume Support**: Monitor multiple BTRFS volumes with a single daemon
 - **Low System Impact**: Runs with lowest CPU/IO priority (nice 19, idle IO class)
 - **Fast Snapshot Deduplication**: Can deduplicate copies of a file in snapshots
 - **Maintenance Window**: Can be configured to limit file hashing and deduplication to a range of hours of the day
