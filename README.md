@@ -26,7 +26,7 @@
 - **Passive Operation**: Continuously runs in the background without any maintenance
 - **Low System Impact**: Single threaded process using nice, ionice, and low ram, for low system impact
 - **BTRFS Transaction Log Monitoring**:  Passively detects file changes without the overhead of inotifywait, or the resource impact of file system scans
-- **Automatic Backoff from continuously modified files**: Intellegently avoids hashing and deduplication of files which are being actively modified, such as open databases
+- **Automatic Backoff**: Intellegently avoids hashing and deduplication of files which are being modified, such as open databases
 - **Fast Snapshot Deduplication**: Deduplicate copies of a file that are also in snapshots
 - **Maintenance Window**: Limit heavy io tasks like deduplication to a range of hours of the day
 - **Safe Operation**: Uses `duperemove` for verified, safe deduplication
