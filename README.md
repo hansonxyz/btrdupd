@@ -16,10 +16,7 @@ btrdupd monitors BTRFS filesystems for duplicate files and automatically dedupli
 - **Smart Processing**: Only processes files that could be duplicates (same size)
 - **Intelligent Snapshot Support**: Automatically finds and deduplicates identical files in snapshots
 - **Extent Awareness**: Detects already-deduplicated files to avoid redundant work
-- **Large Group Handling**: Efficiently processes hundreds of duplicates
-- **Configurable**: Per-volume configuration via `.btrdupd.conf`
 - **Safe Operation**: Uses `duperemove` for verified, safe deduplication
-- **Single Instance**: Prevents multiple daemons per volume via file locking
 - **Operational Modes**: One-time processing or continuous daemon mode
 
 ## How It Works
