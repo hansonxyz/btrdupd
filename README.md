@@ -1,21 +1,31 @@
-# btrdupd - BTRFS Deduplication Daemon 
+#  btrdupd - BTRFS Deduplication Daemon
 
-(COMING SOON)
+  (COMING SOON)
 
-A lightweight, continuous file deduplication daemon for BTRFS filesystems that runs with minimal system impact.
+  A lightweight, continuous file deduplication daemon for BTRFS filesystems that runs with minimal system impact.
 
-## Overview
+  Overview
 
-btrdupd monitors BTRFS filesystems for duplicate files and automatically deduplicates them using `duperemove`. It's designed to run continuously in the background with minimal resource usage, finding and deduplicating files without administrator intervention.
+  btrdupd is a daemon that continuously and passively deduplicates duplicate data on BTRFS filesystems.
+
+  btrdupd takes a file-based, opinionated approach to deduplication. The strategy involves indexing the filesystem into a SQLite database, then monitoring for changes over time using the BTRFS copy-on-write (COW) transaction log. Passively over time, files with identical sizes in the filesystem index are hashed, and when duplicate files are identified,
+  they are submitted to markfasheh's duperemove tool for verification and safe deduplication.
+
+  btrdupd achieves low resource usage through careful engineering of each component. By leveraging SQLite, running with elevated ionice and cpunice settings, operating on a single processing thread, and implementing file-based rather than block-based deduplication, btrdupd can run continuously with minimal RAM, CPU, and disk space requirements. It
+  reliably and asynchronously deduplicates all duplicate files, even on busy filesystems with numerous devices, sockets, snapshots, volatile databases, and mounted volumes.
+
+## Usage
+
+
+## How It Works
+
 
 ## Key Features
 
-- **Automatic Deduplication**: Continuously finds and deduplicates identical files
+- **File Based Deduplication**: Continuously finds and deduplicates identical files
 - **Multi-Volume Support**: Monitor multiple BTRFS volumes with a single daemon
 - **Low System Impact**: Runs with lowest CPU/IO priority (nice 19, idle IO class)
-- **Smart Processing**: Only processes files that could be duplicates (same size)
-- **Intelligent Snapshot Support**: Automatically finds and deduplicates identical files in snapshots
-- **Extent Awareness**: Detects already-deduplicated files to avoid redundant work
+- **Fast Snapshot Deduplication**: Automatically finds and deduplicates identical files in snapshots
 - **Safe Operation**: Uses `duperemove` for verified, safe deduplication
 - **Operational Modes**: One-time processing or continuous daemon mode
 
