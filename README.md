@@ -23,7 +23,8 @@
 ## Key Features
 
 - **File Based Deduplication**: Meant to be used on filesystems with many infrequently changing files.  
-- **Low System Impact**: Runs with lowest CPU/IO priority (nice 19, idle IO class)
+- **Low System Impact**: Runs as passively as possible, using nice, ionice, and low ram usage
+- **BTRFS Transaction Log Monitoring**:  Passively detects changes in the filesystem without the large overhead of inotifywait, or contiunuous filesystem scans
 - **Fast Snapshot Deduplication**: Can deduplicate copies of a file in snapshots
 - **Maintenance Window**: Can be configured to limit file hashing and deduplication to a range of hours of the day
 - **Safe Operation**: Uses `duperemove` for verified, safe deduplication
