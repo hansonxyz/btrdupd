@@ -1,0 +1,32 @@
+[Unit]
+Description=BTRFS Deduplication Daemon (Multi-Volume)
+After=multi-user.target
+
+[Service]
+Type=simple
+# Run as root to access all files
+User=root
+# Configure the volumes to monitor here
+# Example: ExecStart=/usr/local/bin/btrdupd --daemon /mnt/vol1 /mnt/vol2 /mnt/vol3
+ExecStart=/usr/local/bin/btrdupd --daemon /mnt/btrfs-volume1 /mnt/btrfs-volume2
+# Restart on failure
+Restart=on-failure
+RestartSec=300
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=btrdupd
+# Resource limits
+Nice=19
+IOSchedulingClass=idle
+IOSchedulingPriority=7
+# Socket directory for daemon communication
+RuntimeDirectory=btrdupd
+RuntimeDirectoryMode=0755
+# Don't kill on system shutdown, let it clean up
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target

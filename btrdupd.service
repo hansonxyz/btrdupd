@@ -1,0 +1,30 @@
+[Unit]
+Description=BTRFS Deduplication Daemon for %I
+After=multi-user.target
+# Only start if the mount point exists
+ConditionPathExists=%I
+
+[Service]
+Type=simple
+# Run as root to access all files
+User=root
+# Use the mount point from the instance name
+ExecStart=/usr/local/bin/btrdupd %I
+# Restart on failure
+Restart=on-failure
+RestartSec=300
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=btrdupd%I
+# Resource limits
+Nice=19
+IOSchedulingClass=idle
+IOSchedulingPriority=7
+# Don't kill on system shutdown, let it clean up
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
